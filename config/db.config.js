@@ -1,29 +1,30 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
-let isConnected = false;
+let isConnected = false
 
 const initializeDatabase = async () => {
-    mongoose.set('strictQuery', true);
+    mongoose.set('strictQuery', true)
 
     if (isConnected) {
-        console.log('Already connected to the database');
-        return;
+        console.log('Already connected to the database')
+        return
     }
 
     try {
-        const options = {
-     
-        };
+        const options = {}
 
-        const connection = await mongoose.connect(process.env.MONGO_DB_URI, options);
+        const connection = await mongoose.connect(
+            process.env.MONGO_DB_URI,
+            options
+        )
 
-        isConnected = true;
+        isConnected = true
 
-        console.log(`MongoDB Connected: ${connection.connection.host}`);
+        console.log(`MongoDB Connected: ${connection.connection.host}`)
     } catch (error) {
-        console.error(`Error connecting to the database: ${error.message}`);
-        process.exit(1);
+        console.error(`Error connecting to the database: ${error.message}`)
+        process.exit(1)
     }
-};
+}
 
-export default initializeDatabase;
+export default initializeDatabase
