@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import {FaExclamationTriangle} from 'react-icons/fa'
+import { FaExclamationTriangle } from 'react-icons/fa'
 
 const NotFound = () => {
     return (
