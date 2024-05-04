@@ -1,22 +1,34 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import logo from '@/assets/images/logo-white.png'
 import profileDefault from '@/assets/images/profile.png'
 import { FaGoogle } from 'react-icons/fa'
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 
 const Navbar = () => {
+    const { data: session } = useSession()
     const [isMobileMenuClicked, setIsMobileMenuClicked] = useState(false)
     const [isProfileMenuClicked, setIsProfileMenuClicked] = useState(false)
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [providers, setProviders] = useState(null)
+
     const pathName = usePathname()
 
+    useEffect(() => {
+        const setAuthProviders = async () => {
+            const data = await getProviders()
+            setProviders(data)
+        }
+        setAuthProviders()
+    }, [])
+
     const handleOnClick = (e) => {
-        e.profileDefault
+        e.preventDefault
         setIsMobileMenuClicked((prev) => !prev)
     }
+
     return (
         <nav className="bg-blue-700 border-b border-blue-500">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -81,7 +93,7 @@ const Navbar = () => {
                                 >
                                     Properties
                                 </Link>
-                                {isLoggedIn && (
+                                {session && (
                                     <Link
                                         href="/properties/add"
                                         className={`${pathName === '/properties/add' ? 'bg-black' : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
@@ -94,19 +106,28 @@ const Navbar = () => {
                     </div>
 
                     {/* <!-- Right Side Menu (Logged Out) --> */}
-                    {!isLoggedIn && (
+                    {!session && (
                         <div className="hidden md:block md:ml-6">
                             <div className="flex items-center">
-                                <button className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2">
-                                    <FaGoogle className="text-white mr-2" />
-                                    <span>Login or Register</span>
-                                </button>
+                                {providers &&
+                                    Object.values(providers).map((provider) => (
+                                        <button
+                                            key={provider.id}
+                                            onClick={() => signIn(provider.id)}
+                                            className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+                                        >
+                                            <FaGoogle className="text-white mr-2" />
+                                            <span>
+                                                Login with {provider.name}
+                                            </span>
+                                        </button>
+                                    ))}
                             </div>
                         </div>
                     )}
 
                     {/* <!-- Right Side Menu (Logged In) --> */}
-                    {isLoggedIn && (
+                    {session && (
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
                             <Link href="/messages" className="relative group">
                                 <button
@@ -158,8 +179,13 @@ const Navbar = () => {
                                         </span>
                                         <Image
                                             className="h-8 w-8 rounded-full"
-                                            src={profileDefault}
+                                            src={
+                                                session?.user?.image ||
+                                                profileDefault
+                                            }
                                             alt=""
+                                            width={40}
+                                            height={40}
                                         />
                                     </button>
                                 </div>
@@ -180,6 +206,9 @@ const Navbar = () => {
                                             role="menuitem"
                                             tabIndex="-1"
                                             id="user-menu-item-0"
+                                            onClick={() => {
+                                                setIsProfileMenuClicked(false)
+                                            }}
                                         >
                                             Your Profile
                                         </Link>
@@ -189,10 +218,17 @@ const Navbar = () => {
                                             role="menuitem"
                                             tabIndex="-1"
                                             id="user-menu-item-2"
+                                            onClick={() => {
+                                                setIsProfileMenuClicked(false)
+                                            }}
                                         >
                                             Saved Properties
                                         </Link>
                                         <button
+                                            onClick={() => {
+                                                setIsProfileMenuClicked(false)
+                                                signOut()
+                                            }}
                                             className="block px-4 py-2 text-sm text-gray-700"
                                             role="menuitem"
                                             tabIndex="-1"
@@ -224,7 +260,7 @@ const Navbar = () => {
                         >
                             Properties
                         </Link>
-                        {isLoggedIn && (
+                        {session && (
                             <Link
                                 href="/properties/add"
                                 className={`${pathName === '/properties/add' ? 'bg-black' : ''} text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium`}
@@ -232,12 +268,18 @@ const Navbar = () => {
                                 Add Property
                             </Link>
                         )}
-                        {!isLoggedIn && (
-                            <button className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-4">
-                                <FaGoogle className="text-white mr-2" />
-                                <span>Login or Register</span>
-                            </button>
-                        )}
+                        {!session &&
+                            providers &&
+                            Object.values(providers).map((provider) => (
+                                <button
+                                    key={provider.id}
+                                    onClick={() => signIn(provider.id)}
+                                    className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-4"
+                                >
+                                    <FaGoogle className="text-white mr-2" />
+                                    <span>Login with {provider.name}</span>
+                                </button>
+                            ))}
                     </div>
                 </div>
             )}
