@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { FaArrowLeft } from 'react-icons/fa'
 import Details from '@/components/property/Details'
+import DetailImages from '@/components/property/DetailImages'
 
 const PropertyPage = () => {
     const { id } = useParams()
@@ -68,7 +69,7 @@ const PropertyPage = () => {
                     <section className="bg-blue-50">
                         <div className="container m-auto py-10 px-6">
                             <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
-                               <Details property={property} />
+                                <Details property={property} />
                                 {/*  <aside className="space-y-4">
                                     <BookmarkButton property={property} />
                                     <ShareButtons property={property} />
@@ -77,6 +78,7 @@ const PropertyPage = () => {
                             </div>
                         </div>
                     </section>
+                    <DetailImages images={property.images} />
                 </>
             ) : (
                 <p>No property found</p>
