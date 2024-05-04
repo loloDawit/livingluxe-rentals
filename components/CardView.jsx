@@ -37,7 +37,7 @@ const CardView = ({
     return (
         <div className="rounded-xl shadow-md relative">
             <Image
-                src={`/images/properties/${images[0]}`}
+                src={images[0]}
                 alt=""
                 sizes="100vw"
                 width={0}
