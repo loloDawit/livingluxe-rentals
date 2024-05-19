@@ -6,12 +6,14 @@ import {
     FaBed,
     FaBath,
     FaRulerCombined,
-    FaMoneyBill,
+    FaCheckCircle,
     FaMapMarker,
+    FaTimesCircle,
 } from 'react-icons/fa'
+import Bookmark from './property/shared-buttons/Bookmark'
 
-const CardView = ({
-    property: {
+const CardView = ({ property }) => {
+    const {
         type,
         name,
         images,
@@ -21,8 +23,7 @@ const CardView = ({
         rates,
         location,
         _id,
-    },
-}) => {
+    } = property
     const getRateDisplay = () => {
         const rateTypes = ['monthly', 'weekly', 'nightly']
         const rate = rateTypes.find((rateType) => rates[rateType])
@@ -49,10 +50,12 @@ const CardView = ({
                     <div className="text-gray-600">{type}</div>
                     <h3 className="text-xl font-bold">{name}</h3>
                 </div>
-                <h3 className="absolute top-[10px] right-[10px] bg-white px-4 py-2 rounded-lg text-blue-500 font-bold text-right md:text-center lg:text-right">
-                    ${getRateDisplay()}
-                </h3>
-
+                <div className="absolute top-[10px] left-[10px] right-[10px] flex justify-between items-center">
+                    <h3 className="bg-slate-50 px-4 py-2 rounded-lg text-blue-500 text-right md:text-center lg:text-right">
+                        ${getRateDisplay()}
+                    </h3>
+                    <Bookmark property={property} />
+                </div>
                 <div className="flex justify-center gap-4 text-gray-500 mb-4">
                     <p>
                         <FaBed className="inline mr-2"></FaBed> {beds}{' '}
@@ -69,10 +72,14 @@ const CardView = ({
                     </p>
                 </div>
 
-                <div className="flex justify-center gap-4 text-green-900 text-sm mb-4">
-                    {Object.entries(rates).map(([type]) => (
+                <div className="flex justify-center gap-4 text-sm mb-4">
+                    {Object.entries(rates).map(([type, value]) => (
                         <p key={type}>
-                            <FaMoneyBill className="inline mr-2"></FaMoneyBill>{' '}
+                            {value ? (
+                                <FaCheckCircle className="inline mr-2  text-green-900" />
+                            ) : (
+                                <FaTimesCircle className="inline mr-2 text-red-900" />
+                            )}
                             {type.charAt(0).toUpperCase() + type.slice(1)}
                         </p>
                     ))}
@@ -84,7 +91,7 @@ const CardView = ({
                     <div className="flex align-middle gap-2 mb-4 lg:mb-0">
                         <FaMapMarker className="text-orange-700 mt-1"></FaMapMarker>
                         <span className="text-orange-700">
-                            {location.city} {location.state}{' '}
+                            {location.city}, {location.state}{' '}
                         </span>
                     </div>
                     <Link
