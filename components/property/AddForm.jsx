@@ -430,9 +430,9 @@ const AddForm = () => {
                 />
             </div>
 
-            <div>
+            <div className="flex justify-center items-center">
                 <button
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                    className="bg-sky-500 hover:bg-sky-800 text-white py-2 px-4 rounded-full w-48 focus:outline-none focus:shadow-outline"
                     type="submit"
                 >
                     Add Property

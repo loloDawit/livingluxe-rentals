@@ -23,7 +23,6 @@ export const POST = async (req, res) => {
 
         await initializeDatabase()
         const session = await getSessionUser()
-        console.log(session)
 
         if (!session) {
             return new Response('Unauthorized', { status: 401 })
@@ -32,7 +31,6 @@ export const POST = async (req, res) => {
         const imageUploadPromises = []
 
         for (const image of propertyData.images) {
-            console.log(image)
             const imageBuffer = await image.arrayBuffer()
             const imageArray = Array.from(new Uint8Array(imageBuffer))
             const imageData = Buffer.from(imageArray).toString('base64')

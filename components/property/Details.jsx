@@ -6,10 +6,11 @@ import {
     FaCheck,
     FaMapMarker,
 } from 'react-icons/fa'
-//   import PropertyMap from '@/components/PropertyMap';
+import PropertyMap from './Map'
+import Bookmark from './shared-buttons/Bookmark'
 
-const Details = ({
-    property: {
+const Details = ({ property }) => {
+    const {
         type,
         name,
         location,
@@ -19,11 +20,14 @@ const Details = ({
         square_feet,
         description,
         amenities,
-    },
-}) => {
+    } = property
+    //
     return (
         <main>
             <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
+                <div className="px-4 flex justify-end">
+                    <Bookmark property={property} />
+                </div>
                 <div className="text-gray-500 mb-4">{type}</div>
                 <h1 className="text-3xl font-bold mb-4">{name}</h1>
                 <div className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start">
@@ -33,7 +37,7 @@ const Details = ({
                     </p>
                 </div>
 
-                <h3 className="text-lg font-bold my-6 bg-gray-800 text-white p-2">
+                <h3 className="text-lg font-bold my-6 text-black p-2">
                     Rates & Options
                 </h3>
                 <div className="flex flex-col md:flex-row justify-around">
@@ -42,10 +46,8 @@ const Details = ({
                             key={type}
                             className="flex items-center justify-center mb-4 border-b border-gray-200 md:border-b-0 pb-4 md:pb-0"
                         >
-                            <div className="text-gray-500 mr-2 font-bold">
-                                {type}
-                            </div>
-                            <div className="text-2xl font-bold text-blue-500">
+                            <div className="text-stone-600 mr-2">{type}</div>
+                            <div className="text-lg text-stone-950">
                                 {rates[type.toLowerCase()] ? (
                                     `$${rates[type.toLowerCase()].toLocaleString()}`
                                 ) : (
@@ -61,7 +63,7 @@ const Details = ({
                 <h3 className="text-lg font-bold mb-6">
                     Description & Details
                 </h3>
-                <div className="flex justify-center gap-4 text-blue-500 mb-4 text-xl space-x-9">
+                <div className="flex justify-center gap-4 text-violet-950 mb-4 text-xl space-x-9">
                     <p>
                         <FaBed className="inline-block mr-2" /> {beds}{' '}
                         <span className="hidden sm:inline">Beds</span>
@@ -93,7 +95,12 @@ const Details = ({
                 </ul>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-                {/* <PropertyMap property={property} /> */}
+                <h3 className="text-lg font-bold mb-3">Location</h3>
+                <p className="text-sm mb-6">
+                    Property Address: {location.street}, {location.city}{' '}
+                    {location.state}
+                </p>
+                <PropertyMap property={property} />
             </div>
         </main>
     )

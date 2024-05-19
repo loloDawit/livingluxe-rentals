@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import logo from '@/assets/images/logo-white.png'
+import logo from '@/assets/images/logov.png'
 import profileDefault from '@/assets/images/profile.png'
 import { FaGoogle } from 'react-icons/fa'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
@@ -71,11 +71,11 @@ const Navbar = () => {
                             <Image
                                 className="h-10 w-auto"
                                 src={logo}
-                                alt="PureLifeHomes"
+                                alt="MiniAirbnb"
                             />
 
-                            <span className="hidden md:block text-white text-2xl font-bold ml-2">
-                                PureLifeHomes
+                            <span className="hidden md:block text-white text-lg font-bold ml-2">
+                                MiniAirbnb
                             </span>
                         </Link>
                         {/* <!-- Desktop Menu Hidden below md screens --> */}
@@ -83,20 +83,20 @@ const Navbar = () => {
                             <div className="flex space-x-2">
                                 <Link
                                     href="/"
-                                    className={`${pathName === '/' ? 'bg-black' : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
+                                    className={`${pathName === '/' ? 'bg-black' : ''} text-white text-sm hover:bg-gray-800 hover:text-white rounded-md px-3 py-2`}
                                 >
                                     Home
                                 </Link>
                                 <Link
                                     href="/properties"
-                                    className={`${pathName === '/properties' ? 'bg-black' : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
+                                    className={`${pathName === '/properties' ? 'bg-black' : ''} text-white text-sm hover:bg-gray-800 hover:text-white rounded-md px-3 py-2`}
                                 >
                                     Properties
                                 </Link>
                                 {session && (
                                     <Link
                                         href="/properties/add"
-                                        className={`${pathName === '/properties/add' ? 'bg-black' : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
+                                        className={`${pathName === '/properties/add' ? 'bg-black' : ''} text-white text-sm hover:bg-gray-800 hover:text-white rounded-md px-3 py-2`}
                                     >
                                         Add Property
                                     </Link>
@@ -114,7 +114,7 @@ const Navbar = () => {
                                         <button
                                             key={provider.id}
                                             onClick={() => signIn(provider.id)}
-                                            className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+                                            className="flex items-center text-white bg-gray-700 hover:bg-gray-800 hover:text-white rounded-md px-3 py-2"
                                         >
                                             <FaGoogle className="text-white mr-2" />
                                             <span>
@@ -274,7 +274,7 @@ const Navbar = () => {
                                 <button
                                     key={provider.id}
                                     onClick={() => signIn(provider.id)}
-                                    className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-4"
+                                    className="flex items-center text-white bg-gray-700 hover:bg-gray-800 hover:text-white rounded-md px-3 py-2 my-4"
                                 >
                                     <FaGoogle className="text-white mr-2" />
                                     <span>Login with {provider.name}</span>

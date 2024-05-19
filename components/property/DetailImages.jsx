@@ -1,6 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
-import { Gallery, Item } from 'react-photoswipe-gallery';
+import React from 'react'
+import Image from 'next/image'
+import { Gallery, Item } from 'react-photoswipe-gallery'
 
 const DetailImages = ({ images }) => {
     return (
@@ -15,8 +15,8 @@ const DetailImages = ({ images }) => {
                 </div>
             </section>
         </Gallery>
-    );
-};
+    )
+}
 
 const SingleImageItem = ({ image }) => (
     <Item original={image} thumbnail={image} width="1000" height="600">
@@ -33,7 +33,7 @@ const SingleImageItem = ({ image }) => (
             />
         )}
     </Item>
-);
+)
 
 const MultipleImagesGrid = ({ images }) => (
     <div className="grid grid-cols-2 gap-4">
@@ -41,10 +41,17 @@ const MultipleImagesGrid = ({ images }) => (
             <div
                 key={index}
                 className={`${
-                    images.length === 3 && index === 2 ? 'col-span-2' : 'col-span-1'
+                    images.length === 3 && index === 2
+                        ? 'col-span-2'
+                        : 'col-span-1'
                 }`}
             >
-                <Item original={image} thumbnail={image} width="1000" height="600">
+                <Item
+                    original={image}
+                    thumbnail={image}
+                    width="1000"
+                    height="600"
+                >
                     {({ ref, open }) => (
                         <Image
                             ref={ref}
@@ -62,6 +69,6 @@ const MultipleImagesGrid = ({ images }) => (
             </div>
         ))}
     </div>
-);
+)
 
-export default DetailImages;
+export default DetailImages

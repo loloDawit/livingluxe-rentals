@@ -23,7 +23,7 @@ const PropertySchema = new Schema(
                 'Room',
                 'Studio',
                 'Other',
-            ], // Example enum for property types
+            ],
         },
         description: {
             type: String,
@@ -76,12 +76,12 @@ const PropertySchema = new Schema(
 )
 
 // Indexes
-PropertySchema.index({ location: '2dsphere' }) // Example index for geospatial queries
+// PropertySchema.index({ location: '2dsphere' }) // Example index for geospatial queries
 
-// Virtuals
-PropertySchema.virtual('fullAddress').get(function () {
-    return `${this.location.street}, ${this.location.city}, ${this.location.state}, ${this.location.zipcode}`
-})
+// // Virtuals
+// PropertySchema.virtual('fullAddress').get(function () {
+//     return `${this.location.street}, ${this.location.city}, ${this.location.state}, ${this.location.zipcode}`
+// })
 
 // Middleware
 PropertySchema.pre('save', function (next) {

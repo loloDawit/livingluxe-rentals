@@ -9,6 +9,9 @@ import { useParams } from 'next/navigation'
 import { FaArrowLeft } from 'react-icons/fa'
 import Details from '@/components/property/Details'
 import DetailImages from '@/components/property/DetailImages'
+import Bookmark from '@/components/property/shared-buttons/Bookmark'
+import Share from '@/components/property/shared-buttons/Share'
+import ContactForm from '@/components/property/ContactForm'
 
 const PropertyPage = () => {
     const { id } = useParams()
@@ -70,11 +73,10 @@ const PropertyPage = () => {
                         <div className="container m-auto py-10 px-6">
                             <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
                                 <Details property={property} />
-                                {/*  <aside className="space-y-4">
-                                    <BookmarkButton property={property} />
-                                    <ShareButtons property={property} />
-                                    <PropertyContactForm property={property} />
-                                </aside> */}
+                                <aside className="space-y-4">
+                                    <ContactForm property={property} />
+                                    <Share property={property} />
+                                </aside>
                             </div>
                         </div>
                     </section>
