@@ -19,7 +19,6 @@ export const GET = async (req, res) => {
 export const POST = async (req, res) => {
     try {
         const propertyData = await extractFormData(req)
-        console.log(propertyData.images)
 
         await initializeDatabase()
         const session = await getSessionUser()
