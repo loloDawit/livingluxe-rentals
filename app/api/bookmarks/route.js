@@ -3,6 +3,38 @@ import User from '@/models/User'
 import Property from '@/models/Property'
 import { getSessionUser } from '@/utils/getSessionUser'
 
+// GET /api/bookmarks
+export const GET = async (req, res) => {
+    try {
+        await initializeDatabase()
+        const session = await getSessionUser()
+
+        if (!session) {
+            return new Response('Unauthorized', { status: 401 })
+        }
+
+        const userId = session.userId
+        const user = await User.findById(userId)
+        if (!user) {
+            return new Response('Unauthorized', { status: 401 })
+        }
+
+        const properties = await Property.find({
+            _id: { $in: user.bookmarks },
+        })
+
+        return new Response(
+            JSON.stringify(properties),
+            {
+                headers: { 'Content-Type': 'application/json' },
+            },
+            { status: 200 }
+        )
+    } catch (error) {
+        console.error(error)
+        return new Response('something went wrong', { status: 500 })
+    }
+}
 // POST /api/bookmarks
 export const POST = async (req, res) => {
     try {
