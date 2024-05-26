@@ -30,7 +30,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="bg-blue-700 border-b border-blue-500">
+        <nav className="bg-blue-800 border-b border-blue-500">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-20 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -83,20 +83,20 @@ const Navbar = () => {
                             <div className="flex space-x-2">
                                 <Link
                                     href="/"
-                                    className={`${pathName === '/' ? 'bg-black' : ''} text-white text-sm hover:bg-gray-800 hover:text-white rounded-md px-3 py-2`}
+                                    className={`${pathName === '/' ? 'bg-slate-800' : ''} hover-underline-offset-4 text-white text-sm hover:bg-slate-800 hover:text-white rounded-md px-3 py-2`}
                                 >
                                     Home
                                 </Link>
                                 <Link
                                     href="/properties"
-                                    className={`${pathName === '/properties' ? 'bg-black' : ''} text-white text-sm hover:bg-gray-800 hover:text-white rounded-md px-3 py-2`}
+                                    className={`${pathName === '/properties' ? 'bg-slate-800' : ''} hover-underline-offset-4 text-white text-sm hover:bg-slate-800 hover:text-white rounded-md px-3 py-2`}
                                 >
                                     Properties
                                 </Link>
                                 {session && (
                                     <Link
                                         href="/properties/add"
-                                        className={`${pathName === '/properties/add' ? 'bg-black' : ''} text-white text-sm hover:bg-gray-800 hover:text-white rounded-md px-3 py-2`}
+                                        className={`${pathName === '/properties/add' ? 'bg-slate-800' : ''} hover-underline-offset-4  text-white text-sm hover:bg-slate-800 hover:text-white rounded-md px-3 py-2`}
                                     >
                                         Add Property
                                     </Link>
