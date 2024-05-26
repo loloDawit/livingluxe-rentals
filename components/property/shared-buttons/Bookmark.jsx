@@ -1,17 +1,47 @@
 'use client'
 
+import Loading from '@/components/Loading'
 import { useSession } from 'next-auth/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { toast } from 'react-toastify'
 
 const Bookmark = ({ property }) => {
     const { data: session } = useSession()
-    const user = session?.user || {}
+    const userId = session?.user?.id || ''
     const [isBookMarked, setIsBookMarked] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchBookMarkStatus = async () => {
+            try {
+                const res = await fetch('/api/bookmarks/validate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ propertyId: property._id }),
+                })
+
+                if (res.ok) {
+                    const data = await res.json()
+                    setIsBookMarked(data.isBookmarked)
+                } else {
+                    const errorData = await res.json()
+                    console.error('Error fetching bookmark status:', errorData)
+                    toast.error('Failed to fetch bookmark status')
+                }
+            } catch (error) {
+                console.error('Error fetching bookmark status:', error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+        fetchBookMarkStatus()
+    }, [property._id])
 
     const handleClick = async () => {
-        if (!session || !user.id) {
+        if (!session || !userId) {
             return toast.error('Please sign in to bookmark this property')
         }
 
@@ -39,6 +69,13 @@ const Bookmark = ({ property }) => {
             toast.error('An unexpected error occurred')
         }
     }
+
+    if (isLoading)
+        return (
+            <div>
+                <Loading loading={isLoading} size={12} />
+            </div>
+        )
 
     return (
         <button
