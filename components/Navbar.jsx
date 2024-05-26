@@ -213,7 +213,7 @@ const Navbar = () => {
                                             Your Profile
                                         </Link>
                                         <Link
-                                            href="properties/saved"
+                                            href="properties/bookmarked"
                                             className="block px-4 py-2 text-sm text-gray-700"
                                             role="menuitem"
                                             tabIndex="-1"
