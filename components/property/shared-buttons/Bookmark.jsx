@@ -39,7 +39,7 @@ const Bookmark = ({ property }) => {
             }
         }
         fetchBookMarkStatus()
-    }, [property._id])
+    }, [property._id, userId])
 
     const handleClick = async () => {
         if (!session || !userId) {
