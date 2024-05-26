@@ -3,8 +3,6 @@ import User from '@/models/User'
 import Property from '@/models/Property'
 import { getSessionUser } from '@/utils/getSessionUser'
 
-export const dynamic = "force-dynamic";
-
 // POST /api/bookmarks
 export const POST = async (req, res) => {
     try {
@@ -12,7 +10,7 @@ export const POST = async (req, res) => {
         const session = await getSessionUser()
 
         if (!session) {
-            return res.status(401).json({ message: 'Unauthorized' })
+            return new Response('Unauthorized', { status: 401 })
         }
 
         const { propertyId } = await req.json()
@@ -20,29 +18,47 @@ export const POST = async (req, res) => {
 
         const user = await User.findById(userId)
         if (!user) {
-            return res.status(401).json({ message: 'Unauthorized' })
+            return new Response('Unauthorized', { status: 401 })
         }
 
         const property = await Property.findById(propertyId)
         if (!property) {
-            return res.status(404).json({message: 'Property not found'})
+            return new Response('Property not found', { status: 404 })
+        }
+
+        if (property.owner.toString() === userId) {
+            return new Response(
+                JSON.stringify({
+                    message: 'You cannot bookmark your own property',
+                    isBookmarked: false,
+                }),
+                { status: 400 }
+            )
         }
 
         if (user.bookmarks.includes(propertyId)) {
-            user.bookmarks.pull(propertyId);
+            user.bookmarks.pull(propertyId)
             await user.save()
-            return res.status(201).json({
-                message: 'Property already bookmarked, removed now',
-                isBookmarked: false,
-            })
+            return new Response(
+                JSON.stringify({
+                    message: 'Bookmark removed successfully',
+                    isBookmarked: false,
+                }),
+                { status: 201 }
+            )
         }
 
         user.bookmarks.push(propertyId)
         await user.save()
 
-        return res.status(201).json({ message: 'success', isBookmarked:true })
+        return new Response(
+            JSON.stringify({ message: 'success', isBookmarked: true }),
+            {
+                status: 201,
+            }
+        )
     } catch (error) {
         console.error(error)
-        return res.status(500).json({ message: 'something went wrong' })
+        return new Response('something went wrong', { status: 500 })
     }
 }
