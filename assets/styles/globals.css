@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.hover-underline-offset-4:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
