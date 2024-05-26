@@ -9,7 +9,7 @@ import {
 import PropertyMap from './Map'
 import Bookmark from './shared-buttons/Bookmark'
 
-const Details = ({ property }) => {
+const Details = ({ property, shouldShowBookMark }) => {
     const {
         type,
         name,
@@ -21,13 +21,15 @@ const Details = ({ property }) => {
         description,
         amenities,
     } = property
-    //
+
     return (
         <main>
             <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
-                <div className="px-4 flex justify-end">
-                    <Bookmark property={property} />
-                </div>
+                {shouldShowBookMark && (
+                    <div className="px-4 flex justify-end">
+                        <Bookmark property={property} />
+                    </div>
+                )}
                 <div className="text-gray-500 mb-4">{type}</div>
                 <h1 className="text-3xl font-bold mb-4">{name}</h1>
                 <div className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start">
