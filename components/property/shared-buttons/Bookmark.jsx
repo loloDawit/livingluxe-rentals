@@ -13,6 +13,7 @@ const Bookmark = ({ property }) => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        if (!userId) return setIsLoading(false)
         const fetchBookMarkStatus = async () => {
             try {
                 const res = await fetch('/api/bookmarks/validate', {
