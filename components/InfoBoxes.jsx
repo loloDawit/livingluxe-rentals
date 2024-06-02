@@ -11,7 +11,7 @@ const InfoBoxes = () => {
                 backgroundColor: 'bg-black',
             },
             content:
-                'Find your dream rental property. Bookmark your favorite listings and contact the owners directly.',
+                'Find your dream rental. Bookmark your favorite listings and contact the owners directly.',
         },
         {
             heading: 'For Property Owners',
