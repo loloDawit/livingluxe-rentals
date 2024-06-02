@@ -13,7 +13,7 @@ const ContactForm = ({ property }) => {
         phone: '',
         message: '',
     })
-    const [wasSubmitted, setWasSubmitted] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
 
     const handleChange = (e) => {
         const { id, value } = e.target
@@ -43,7 +43,7 @@ const ContactForm = ({ property }) => {
 
             if (res.ok) {
                 toast.success('Message sent successfully')
-                setWasSubmitted(true)
+                setIsSubmitted(true)
             } else {
                 const errorData = await res.json()
                 toast.error(errorData.message || 'Error sending form')
@@ -66,7 +66,7 @@ const ContactForm = ({ property }) => {
             <h3 className="text-xl font-bold mb-6">Contact Property Manager</h3>
             {!session ? (
                 <p>You must be logged in to send a message</p>
-            ) : wasSubmitted ? (
+            ) : isSubmitted ? (
                 <p className="text-green-500 mb-4">
                     Your message has been sent successfully
                 </p>
