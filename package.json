@@ -10,8 +10,12 @@
         "format": "npx prettier --write ."
     },
     "dependencies": {
+        "@radix-ui/react-slot": "^1.0.2",
         "bcrypt": "^5.1.1",
+        "class-variance-authority": "^0.7.0",
         "cloudinary": "^2.2.0",
+        "clsx": "^2.1.1",
+        "lucide-react": "^0.383.0",
         "mapbox-gl": "^3.3.0",
         "mongodb": "^6.5.0",
         "mongoose": "^8.3.2",
@@ -26,7 +30,9 @@
         "react-photoswipe-gallery": "^3.0.1",
         "react-share": "^5.1.0",
         "react-spinners": "^0.13.8",
-        "react-toastify": "^10.0.5"
+        "react-toastify": "^10.0.5",
+        "tailwind-merge": "^2.3.0",
+        "tailwindcss-animate": "^1.0.7"
     },
     "devDependencies": {
         "eslint": "8.57.0",
