@@ -8,10 +8,11 @@ export const GET = async (req, res) => {
     try {
         await initializeDatabase()
         const { searchParams } = new URL(req.url)
-        const { valid, message, location, propertyType } = validateSearchParams(searchParams);
+        const { valid, message, location, propertyType } =
+            validateSearchParams(searchParams)
 
         if (!valid) {
-            return new Response(message, { status: 400 });
+            return new Response(message, { status: 400 })
         }
 
         let query = {
@@ -49,11 +50,11 @@ const validateSearchParams = (searchParams) => {
     const propertyType = getSearchParam('propertyType')
 
     if (!location) {
-        return { valid: false, message: 'Location is required' };
+        return { valid: false, message: 'Location is required' }
     }
     if (!propertyType) {
-        return { valid: false, message: 'Property type is required' };
+        return { valid: false, message: 'Property type is required' }
     }
 
-    return { valid: true, location, propertyType };
-};
+    return { valid: true, location, propertyType }
+}
