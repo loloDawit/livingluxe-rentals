@@ -3,7 +3,7 @@ import CardView from './CardView'
 import Link from 'next/link'
 
 const RecentsCardView = async () => {
-    const properties = await fetchProperties()
+    const { properties } = await fetchProperties()
     const recentProperties = properties
         .sort(() => Math.random() - 0.5)
         .slice(0, 3)
