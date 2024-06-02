@@ -8,8 +8,30 @@ import cloudinary from '@/config/cloudinary'
 export const GET = async (req, res) => {
     try {
         await initializeDatabase()
-        const properties = await Property.find({})
-        return new Response(JSON.stringify(properties), { status: 200 })
+
+        const page = parseInt(req.nextUrl.searchParams.get('page')) || 1
+        const size = parseInt(req.nextUrl.searchParams.get('size')) || 3
+
+        // Calculate the number of documents to skip
+        const skip = (page - 1) * size
+
+        // Fetch the documents with pagination
+        const properties = await Property.find({}).skip(skip).limit(size)
+
+        const totalDocuments = await Property.countDocuments()
+        const totalPages = Math.ceil(totalDocuments / size)
+
+        // Return the documents along with pagination metadata
+        return new Response(
+            JSON.stringify({
+                properties,
+                page,
+                size,
+                totalDocuments,
+                totalPages,
+            }),
+            { status: 200 }
+        )
     } catch (error) {
         return new Response('something went wring', { status: 500 })
     }
