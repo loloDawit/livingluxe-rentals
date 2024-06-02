@@ -40,7 +40,13 @@ export const POST = async (req, res) => {
                 status: 200,
             })
         }
+
+        // Default response if property is not owned and not bookmarked
+        return new Response(JSON.stringify({ isBookmarked: false }), {
+            status: 200,
+        })
     } catch (error) {
+        console.error('error: ', error)
         return new Response(
             JSON.stringify({ message: 'An unexpected error occurred' }),
             { status: 500 }
