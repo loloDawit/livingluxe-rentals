@@ -16,7 +16,9 @@ const Properties = () => {
     const fetchProperties = useCallback(async () => {
         setIsLoading(true)
         try {
-            const response = await fetch(`/api/properties?page=${page}&size=${PAGE_SIZE}`)
+            const response = await fetch(
+                `/api/properties?page=${page}&size=${PAGE_SIZE}`
+            )
             if (!response.ok) {
                 throw new Error('Failed to fetch properties')
             }
