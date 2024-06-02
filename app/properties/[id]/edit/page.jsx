@@ -1,5 +1,5 @@
 import React from 'react'
-import EditForm from '@/components/property/editform'
+import EditForm from '@/components/property/Editform'
 
 const UpdateProperty = () => {
     return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import Messages from '@/components/messages'
+import Messages from '@/components/Messages'
 
 const MessagesView = () => {
     return (
