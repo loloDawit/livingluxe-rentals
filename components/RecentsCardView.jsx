@@ -1,4 +1,4 @@
-import { fetchProperties } from '@/utils/api.requests'
+import { fetchProperties } from '@/utils/apiRequests'
 import CardView from './CardView'
 import Link from 'next/link'
 

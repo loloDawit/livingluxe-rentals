@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { fetchProperty } from '@/utils/api.requests'
+import { fetchProperty } from '@/utils/apiRequests'
 import Loading from '../Loading'
 import { toast } from 'react-toastify'
 
