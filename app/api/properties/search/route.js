@@ -1,7 +1,5 @@
 import initializeDatabase from '@/config/db.config'
-import User from '@/models/User'
 import Property from '@/models/Property'
-import { getSessionUser } from '@/utils/getSessionUser'
 
 // GET /api/properties/search
 export const GET = async (req, res) => {
