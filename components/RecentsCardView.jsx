@@ -3,7 +3,7 @@ import CardView from './CardView'
 import Link from 'next/link'
 
 const RecentsCardView = async () => {
-    const { properties } = await fetchProperties()
+    const { properties = [] } = await fetchProperties()
     const recentProperties = properties
         .sort(() => Math.random() - 0.5)
         .slice(0, 3)
@@ -15,10 +15,10 @@ const RecentsCardView = async () => {
                         Recent Properties
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {recentProperties.length === 0 ? (
+                        {recentProperties?.length === 0 ? (
                             <p>No properties found.</p>
                         ) : (
-                            recentProperties.map((recentProperty) => (
+                            recentProperties?.map((recentProperty) => (
                                 <CardView
                                     key={recentProperty._id}
                                     property={recentProperty}
