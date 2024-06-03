@@ -18,8 +18,6 @@ const SearchResult = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(false)
 
-    console.log({ location, propertyType })
-
     useEffect(() => {
         const fetchSearchResult = async () => {
             try {
