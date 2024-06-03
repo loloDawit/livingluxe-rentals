@@ -16,6 +16,8 @@ async function fetchProperties({ showFeatured = false } = {}) {
         // Fetch data with cache disabled
         const res = await fetch(url, { cache: 'no-store' })
 
+        console.log('fetchProperties', res)
+
         if (!res.ok) {
             throw new Error('Failed to fetch data')
         }
