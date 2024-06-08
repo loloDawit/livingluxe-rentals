@@ -10,7 +10,7 @@ import { GlobalProvider } from '@/context/GlobalContext'
 export const metadata = {
     title: 'Discover Your Next Dream Home',
     description:
-        'Explore a wide range of rental properties to find your perfect home. Whether you are looking for apartments, houses, or condos, we have listings that match your needs and budget.',
+        'Explore diverse rentals to find your perfect home. From apartments to houses and condos, we have listings for every need and budget.',
     keywords:
         'rental properties, find your next home, dream home, apartments for rent, houses for rent, condos for rent, rental listings, property search',
 }
@@ -19,6 +19,27 @@ const MainLayout = ({ children }) => {
     return (
         <GlobalProvider>
             <AuthProvider>
+                <head>
+                    <link rel="icon" href="/favicon.ico" sizes="any" />
+                    <link
+                        rel="apple-touch-icon"
+                        href="/apple-icon?<generated>"
+                        type="image/<generated>"
+                        sizes="<generated>"
+                    />
+                    <link
+                        rel="icon"
+                        type="image/png"
+                        sizes="32x32"
+                        href="/favicon-32x32.png"
+                    />
+                    <link
+                        rel="icon"
+                        type="image/png"
+                        sizes="16x16"
+                        href="/favicon-16x16.png"
+                    />
+                </head>
                 <html lang="en">
                     <body>
                         <Navbar />
